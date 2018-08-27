@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <button type="button" class="close"
+            data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title" id="myModalLabel">
+        新 增 微 服 务
+    </h4>
+</div>
+<div class="ibox-content">
+    <form class="form-horizontal" id="category_add">
+        <div class="form-group">
+            <label class="col-sm-4 control-label ">微服务名称: </label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="name" required="true"/>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label ">ip地址:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="ip"  required="true"  placeholder="127.0.0.1"/>
+            </div>
+        </div>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label ">端口号:</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="port"  required="true"  placeholder="8080"/>
+            </div>
+        </div>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label ">healthCheckUrl:</label>
+
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="healthCheckUrl" placeholder="http://127.0.0.1:8080/health" />
+            </div>
+        </div>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-5  ">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    $("#category_add").submit(function () {
+        var url = server + "/discovery/addMicroService";
+        var data = $("#category_add").serialize();
+        do_post(url, data, function (data) {
+            if (data.errorMsg != undefined) {
+                alert(data.errorMsg);
+                return;
+            }
+            alert("保存成功");
+            $("#myModal-add-info").attr("data-reloadCode", "#");
+            $('#myModal-add-info').modal('hide');
+            return;
+        })
+        return false;
+    })
+
+</script>

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.base.mysql.query.util.SpringContext,\
+  com.yihu.base.mysql.query.BaseJpaService

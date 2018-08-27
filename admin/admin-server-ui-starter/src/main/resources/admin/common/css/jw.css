@@ -1,0 +1,12 @@
+/* 解决弹窗输入时变透明*/
+.modal-content {
+    border:0px !important ;
+}
+.form-control{
+    width: 250px;
+}
+
+/* easyui  grid  行高*/
+.datagrid-row {
+    height: 34px !important ;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link href="../../common/css/bootstrap/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="../../common/css/bootstrap/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+
+    <link href="../../common/css/bootstrap/animate.min.css" rel="stylesheet">
+    <link href="../../common/css/bootstrap/style.min.css?v=3.0.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="../../common/css/bootstrap/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../../common/css/jw.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="ibox-content">
+    <div class="" id="ibox-content-log-detail">
+
+        <div id="vertical-timeline" class="vertical-container light-timeline"
+             v-for="message in messages">
+
+            <div class="vertical-timeline-block">
+
+                <template v-if="message.method != null && message.method === 'GET'" >
+                    <div class="vertical-timeline-icon blue-bg" onclick="closeOrOpen(this)">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </template>
+                <template v-if="message.method != null && message.method === 'POST'">
+                    <div class="vertical-timeline-icon lazur-bg"  onclick="closeOrOpen(this)">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </template>
+                <template v-if="message.method != null && message.method === 'PUT'">
+                    <div class="vertical-timeline-icon yellow-bg" onclick="closeOrOpen(this)">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </template>
+                <template v-if="message.method != null && message.method === 'DELETE'">
+                    <div class="vertical-timeline-icon red-bg" onclick="closeOrOpen(this)">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </template>
+
+                <template v-if="message.method == null ">
+                    <div class="vertical-timeline-icon gray-bg" onclick="closeOrOpen(this)">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                </template>
+
+                <div class="vertical-timeline-content">
+
+                    <h2>微服务名称:{{message.spanname}}</h2>
+                    <p>事件名称:{{message.eventname}}</p>
+                    <div style="display: none">
+                        <p>流程ID:{{message.traceid}}</p>
+                        <p>模块ID:{{message.spanid}}</p>
+                        <p>事件开始时间:{{message.eventstarttimestr}}</p>
+                        <p>事件结束时间:{{message.eventendtimestr}}</p>
+                        <p>事件执行时间:{{message.excutetime}} ms</p>
+                        <template v-if="message.eventname === 'system_http_tracer'">
+                            <p>请求用户IP地址:{{message.ip}}</p>
+                            <p>请求方式:{{message.method}}</p>
+                            <p>请求路径:{{message.uri}}</p>
+                            <p>请求头信息:{{message.header}}</p>
+                            <p>请求参数:{{message.requestparams}}</p>
+                            <p>返回参数:{{message.responseparams}}</p>
+                        </template>
+                        <template v-else-if="message.eventname === 'system_zuul_tracer'">
+                            <p>请求用户IP地址:{{message.ip}}</p>
+                            <p>请求方式:{{message.method}}</p>
+                            <p>请求路径:{{message.uri}}</p>
+                            <p>请求头信息:{{message.header}}</p>
+                            <p>请求参数:{{message.requestparams}}</p>
+                            <p>返回参数:{{message.responseparams}}</p>
+                        </template>
+                        <template v-else-if="message.eventname === 'system_sql_hibernate_tracer'">
+                            <p>sql语句:{{message.sql}}</p>
+                        </template>
+                        <template v-else-if="message.eventname === 'system_sql_springJDBC_tracer'">
+                            <p>sql语句:{{message.sql}}</p>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 全局js -->
+<script type="text/javascript" src="../../common/js/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../common/js/bootstrap/bootstrap.min.js"></script>
+<script  type="text/javascript"src="../../common/js/content.min.js?v=1.0.0"></script>
+<script type="text/javascript" src="../../common/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="../../common/js/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="../../common/js/vue/vue.min.js"></script>
+<script type="text/javascript" src="../../common/js/util/util.js"></script>
+<script type="text/javascript" src="../../common/js/common.js"></script>
+<script type="text/javascript" src="../js/distributedLogDetail.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#lightVersion").click(function (event) {
+            event.preventDefault();
+            $("#ibox-content").removeClass("ibox-content");
+            $("#vertical-timeline").removeClass("dark-timeline");
+            $("#vertical-timeline").addClass("light-timeline")
+        });
+        $("#darkVersion").click(function (event) {
+            event.preventDefault();
+            $("#ibox-content").addClass("ibox-content");
+            $("#vertical-timeline").removeClass("light-timeline");
+            $("#vertical-timeline").addClass("dark-timeline")
+        });
+        $("#leftVersion").click(function (event) {
+            event.preventDefault();
+            $("#vertical-timeline").toggleClass("center-orientation")
+        })
+    });
+</script>
+</body>
+
+</html>

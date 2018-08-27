@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.base.config.quartz.DefaultSchedulerConfig,\
+  com.yihu.base.config.quartz.QuartzHelper,\
+  com.yihu.base.config.quartz.DefaultJobFactory

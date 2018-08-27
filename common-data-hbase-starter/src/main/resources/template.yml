@@ -1,0 +1,7 @@
+hadoop:
+  hbase-properties:
+    hbase.zookeeper.property.clientPort: 2181 #zookeeper端口号
+    zookeeper.znode.parent: /hbase-unsecure #zookeeper节点
+    hbase.zookeeper.quorum:  node1.hde.h3c.com,node2.hde.h3c.com,node3.hde.h3c.com #zookeeper地址
+  user:
+    name: root

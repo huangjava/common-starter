@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这个是根配置文件，一定要有的
+    scan：是当配置文件被修改后会被重新加载
+    scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+    debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<configuration scan="true" scanPeriod="6000" debug="false">
+
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </root>
+    <!--
+    name:logger的名称
+    level:输出级别是INFO
+    additivity属性为false，表示此loger的打印信息不再向上级传递,是否继承父类的日志级别
+    -->
+    <logger name="demo1" level="INFO" additivity="false" >
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <!-- 演示按时间滚动的策略 -->
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logbase}/usercenter.log</File>
+        <!--<File>C:/logbackLog/usercenter.log</File>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>${logbase}/dailyRollingFileAppender.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- 保留 30天数据，默认无限-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+        </encoder>
+    </appender>
+
+</configuration>

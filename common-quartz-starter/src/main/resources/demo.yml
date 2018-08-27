@@ -1,0 +1,3 @@
+quartz:
+  namespace: svr-demo ##quartz的命名空间，名称一样实现消费负载
+  overwriteExistingJobs: true ##是否覆盖job

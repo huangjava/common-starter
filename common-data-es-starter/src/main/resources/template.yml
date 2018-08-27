@@ -1,0 +1,14 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: jkzl #es集群的名字
+      cluster-nodes: 172.19.103.68:9300  #多个逗号分割
+      cluster-nodes-jest: http://172.19.103.68:9200  #多个逗号分割
+      jest:
+        discovery-enabled: true #开启嗅探
+        conn-timeout: 60 # 连接时间单位是秒
+        read-timeout: 60 # 读取时间单位是秒
+        multith-readed: true #开启多线程
+        max-total-connection: 50 ##最大连接
+        max-connection-idle-time: 50 #最大等待时间
+

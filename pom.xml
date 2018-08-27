@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+    </parent>
+
+    <groupId>com.yihu</groupId>
+    <artifactId>jkzl-start</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <developers>
+        <developer>
+            <id>cwd</id>
+            <name>陈伟达</name>
+            <email>494679975@qq.com</email>
+            <organizationUrl>localhost</organizationUrl>
+            <roles>
+                <role>Project programmer</role>
+            </roles>
+        </developer>
+    </developers>
+    <!--deploy 的时候发布到这个服务器-->
+    <distributionManagement>
+        <repository>
+            <id>jkzlRepositories</id>
+            <name>jkzlRepositories</name>
+            <url>http://172.19.103.43:8081/nexus/content/repositories/jkzlRepositories/</url>
+        </repository>
+    </distributionManagement>
+    <modules>
+        <module>/common-swagger-starter</module>
+        <module>/common-quartz-starter</module>
+        <module>/common-logback-starter</module>
+        <module>/common-activemq-starter</module>
+        <module>/common-cache-starter</module>
+        <module>/common-async-starter</module>
+
+
+        <module>/common-data-fastdfs-starter</module>
+        <module>/common-data-es-starter</module>
+        <module>/common-data-solr-starter</module>
+        <module>/common-data-mysql-starter</module>
+        <module>/common-data-redis-starter</module>
+        <module>/common-data-hbase-starter</module>
+        <module>/common-router-starter</module>
+
+    </modules>
+
+    <properties>
+        <version.mysql>5.1.38</version.mysql>
+        <version.jackson>2.8.1</version.jackson>
+        <version.myCommon>1.0.0</version.myCommon>
+        <version.spring-data-hadoop>2.5.0.RELEASE</version.spring-data-hadoop>
+        <version.springside>4.2.3-GA</version.springside>
+        <version.zipkin>1.24.0</version.zipkin>
+        <version.hibernate>5.0.12.Final</version.hibernate>
+        <version.hibernate-jpa>1.0.0.Final</version.hibernate-jpa>
+        <version.servlet-api>3.1.0</version.servlet-api>
+        <version.swagger>2.7.0</version.swagger>
+        <version.swagger-ui>2.7.0</version.swagger-ui>
+        <version.quartz>2.3.0</version.quartz>
+        <version.logback>1.2.3</version.logback>
+        <version.jest>2.4.0</version.jest>
+        <version.json>20160212</version.json>
+        <verion.fastJson>1.2.17</verion.fastJson>
+        <version.net-json>2.4</version.net-json>
+        <version.common.lang3>3.2.1</version.common.lang3>
+        <version.commons.collections>3.2.2</version.commons.collections>
+        <version.commons.codec>1.11</version.commons.codec>
+        <version.elasticsearch>2.4.4</version.elasticsearch>
+        <version.elasticsearch-sql>2.4.1.0</version.elasticsearch-sql>
+
+        <version.hbase>1.1.12</version.hbase>
+        <version.hadoop>2.7.4</version.hadoop>
+        <version.scala>2.10.6</version.scala>
+        <version.hbase-client>1.1.1</version.hbase-client>
+        <version.joda-time>2.8.2</version.joda-time>
+        <version.solr>5.5.1</version.solr>
+        <version.fastdfs>1.25</version.fastdfs>
+
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
+        <asciidoctorj.version>1.5.5</asciidoctorj.version>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+
+
+    </properties>
+    <!--dependencyManagement作用子配置不写版本默认继承父配置-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--旧版本 自己的封装 common 已经停止更新 start-->
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-async</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-security</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>common-entity</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>common-request-mapping</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>common-exception</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>common-rest-model</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>svr-base</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.jw</groupId>
+                <artifactId>common-util</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-swagger</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-data-mysql</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-log</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-quartz</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+
+            <!--旧版本 自己的封装 common 已经停止更新 end-->
+
+
+            <!--新版本 封装 common start-->
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-activemq-starter</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-cache-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-async-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-es-starter</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-fastdfs-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-hbase-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-mysql-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-redis-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-data-solr-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-logback-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-quartz-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-security-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yihu</groupId>
+                <artifactId>common-swagger-starter</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!--新版本 封装 common start-->
+
+            <!--数据库驱动 start-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${version.mysql}</version>
+            </dependency>
+            <!--数据库驱动 end-->
+
+            <!--fastJson start-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jaxb-annotations</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <!--fastJson end-->
+            <!--zipkin 日志追踪 start-->
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${version.zipkin}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${version.zipkin}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-storage-elasticsearch-http</artifactId>
+                <version>${version.zipkin}</version>
+            </dependency>
+            <!--zipkin  end-->
+            <!---->
+
+            <dependency>
+                <groupId>org.springside</groupId>
+                <artifactId>springside-core</artifactId>
+                <version>${version.springside}</version>
+                <classifier>GA</classifier>
+            </dependency>
+            <!--hibernate start-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.hibernate}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${version.hibernate-jpa}</version>
+            </dependency>
+            <!--hibernate end-->
+
+            <!--fastdfs start-->
+            <dependency>
+                <groupId>com.yihu.base</groupId>
+                <artifactId>common-data-fastdfs</artifactId>
+                <version>${version.myCommon}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.csource</groupId>
+                <artifactId>fastdfs_lib</artifactId>
+                <version>${version.fastdfs}</version>
+            </dependency>
+
+            <!--fastdfs end-->
+            <!--servlet api-->
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${version.servlet-api}</version>
+            </dependency>
+            <!--servlet api-->
+            <!--swagger ui start-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${version.swagger}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${version.swagger-ui}</version>
+            </dependency>
+            <!--swagger ui end-->
+            <!--quartz start-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${version.quartz}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${version.quartz}</version>
+            </dependency>
+            <!--quartz end-->
+            <!--log start-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <!--log end-->
+            <!-- json start-->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${version.json}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>${version.net-json}</version>
+            </dependency>
+
+            <!--json end -->
+            <!-- es 客户端 start-->
+            <dependency>
+                <groupId>io.searchbox</groupId>
+                <artifactId>jest</artifactId>
+                <version>${version.jest}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${version.elasticsearch}</version>
+            </dependency>
+            <!-- es 客户端 end-->
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${version.common.lang3}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${version.commons.collections}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${version.commons.codec}</version>
+            </dependency>
+            <!--hadoop start-->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-common</artifactId>
+                <version>${version.hadoop}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client</artifactId>
+                <version>${version.hadoop}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-hdfs</artifactId>
+                <version>${version.hadoop}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-mapreduce-client-core</artifactId>
+                <version>${version.hadoop}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+                <version>${version.hadoop}</version>
+            </dependency>
+            <!--hadoop endf-->
+            <!--scala编译 start-->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${version.scala}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-compiler</artifactId>
+                <version>${version.scala}</version>
+            </dependency>
+            <!--scala编译 end-->
+            <!--elasticsearch start-->
+            <dependency>
+                <groupId>org.nlpcn</groupId>
+                <artifactId>elasticsearch-sql</artifactId>
+                <version>${version.elasticsearch-sql}</version>
+            </dependency>
+            <!--elasticsearch end-->
+            <!--alibaba  json 包-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${verion.fastJson}</version>
+                <!--json 包-->
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-hadoop-hbase</artifactId>
+                <version>${version.spring-data-hadoop}</version>
+            </dependency>
+            <!-- hbase start-->
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-protocol</artifactId>
+                <version>${version.hbase-client}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-client</artifactId>
+                <version>${version.hbase-client}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-common</artifactId>
+                <version>${version.hbase-client}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- hbase end-->
+
+            <!--solr start-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${version.joda-time}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-core</artifactId>
+                <version>${version.solr}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>${version.solr}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--solr end-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>4.3.3.RELEASE</version>
+            </dependency>
+        </dependencies>
+
+
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!--编译插件 start-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+                <version>3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--编译插件 end-->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor.maven.plugin.version}</version>
+                <configuration>
+                    <sourceDirectory>build</sourceDirectory>
+                    <outputDirectory>build/asciidoc/${project.version}</outputDirectory>
+                    <headerFooter>true</headerFooter>
+                    <doctype>book</doctype>
+                    <sourceHighlighter>coderay</sourceHighlighter>
+                    <attributes>
+                        <toc>left</toc>
+                        <toclevels>3</toclevels>
+                        <sectnums>true</sectnums>
+                        <revnumber>${project.version}</revnumber>
+                        <revdate>${maven.build.timestamp}</revdate>
+                        <organization>厦门健康之路</organization>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>output-docbook</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>docbook</backend>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--打成war包插件 还需要
+                1.配置类继承SpringBootServletInitializer
+                2.把所有tomcat相关的包的生命周期改成provide
+                 start-->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <!--打成war包插件 end-->
+                <!--springboot插件 start-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--springboot插件 en-->
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

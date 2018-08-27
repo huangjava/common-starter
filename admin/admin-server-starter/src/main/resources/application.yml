@@ -1,0 +1,57 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: admin-server-starter
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1501877145@qq.com
+    protocol: smtp
+    password: uihqhvqtrnkwhdhf #QQ的授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+           class: javax.net.ssl.SSLSocketFactory
+          starttls: true
+          required: true
+
+##关闭验证
+management:
+  security:
+    enabled: false
+
+#euruka相关配置
+eureka:
+  client:
+    serviceUrl:
+      #http://账号:密码@127.0.0.1:8761/eureka/
+      defaultZone: http://jw:jkzl@127.0.0.1:8761/eureka/
+  instance:
+    #eurika使用IP不使用host
+    prefer-ip-address: true
+    #定制化在eurika中显示的名称
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+
+#info端点信息
+info:
+  application:
+    name: ${spring.application.name}
+    port: ${server.port}
+##logback地址
+logging:
+  file: admin-server-starter.log
+  path: G:\idea_workspace\jkzl_git\jkzl-start\jkzl-start\admin\admin-server-starter\logs
+  level:
+    root: INFO
+
+yihu:
+  admin:
+    server:
+      defaultIndexName: admin_log  ##默认admin_log
+      defaultTypeName: admin_log ##默认admin_log
+      partition: month ##默认是 day week month year

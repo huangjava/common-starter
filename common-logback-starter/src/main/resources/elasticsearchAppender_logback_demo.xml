@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这个是根配置文件，一定要有的
+    scan：是当配置文件被修改后会被重新加载
+    scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+    debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<configuration scan="true" scanPeriod="6000" debug="false">
+
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="io.searchbox" level="WARN"/>
+
+    <appender name="elasticsearch" class="com.yihu.base.es.ElasticsearchAppender">
+        <hosts>http://172.19.103.68:9200,http://172.19.103.68:9200</hosts> <!--支持集群 逗号分割-->
+        <index>logs</index><!--es index 名称-->
+        <type>logs</type><!--es type 名称-->
+        <clusterName>jkzl</clusterName><!--es 集群 名称-->
+        <!--按照什么模式区滚动 支持 按照
+         每天:day
+         每周:week
+         每月:month
+         每年:year
+          -->
+        <rolling>day</rolling>
+        <maxTotalConnection></maxTotalConnection><!-- 最大连接数 默认50-->
+        <maxConnectionIdleTime></maxConnectionIdleTime><!-- 链接最大等待时间 默认10分钟 单位 分钟-->
+        <connTimeout></connTimeout><!-- 链接超时时间 默认10分种 单位毫秒-->
+        <multiThreaded></multiThreaded><!-- 是否多线程 默认true-->
+        <discoveryEnabled></discoveryEnabled><!-- 是否开启自动发现模式  集群模式使用 默认false-->
+    </appender>
+
+    <logger name="elasticsearch_logger" level="INFO" additivity="false">
+        <appender-ref ref="elasticsearch"/>
+    </logger>
+
+    <!--提高整个日志的错误级别-->
+    <root level="INFO">
+    </root>
+
+</configuration>

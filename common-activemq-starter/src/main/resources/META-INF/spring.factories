@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.base.activemq.config.jms.ActiveMQProperties,\
+  com.yihu.base.activemq.config.jms.JmsActivcemqConfig

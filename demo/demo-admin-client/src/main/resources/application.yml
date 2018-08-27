@@ -1,0 +1,59 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: demo-socket-client
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.19.103.77/wlyy?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: 123456
+
+yihu:
+  admin:
+    client:
+      advice:
+        http: true #默认true
+        sql:
+          hibernate: true ##默认false
+          springJDBC: true ##默认true
+        zuul:
+          pre: true #默认false
+          post: true #默认false
+      server:
+        ip: 192.168.131.250
+        port: 8082
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://jw:jkzl@127.0.0.1:8761/eureka/
+
+
+  instance:
+    #eurika使用IP不使用host
+    prefer-ip-address: true
+    #定制化在eurika中显示的名称
+    ##instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    leaseRenewalIntervalInSeconds: 30 ##心跳时间 默认30秒 一般不修改
+
+
+management:
+  security:
+    enabled: false
+
+
+endpoints:
+  logfile:
+    enabled: true
+
+
+logging:
+  file: ${logging.path}demo-socket-client.log
+  path: E:\idea_workspace\jkzl_git\jkzl-starter\jkzl-starter\demo\demo-admin-client\logs\
+  level:
+    root: INFO

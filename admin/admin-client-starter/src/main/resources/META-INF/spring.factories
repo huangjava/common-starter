@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.admin.client.config.WebsocketConfig,\
+  com.yihu.admin.client.config.FeignOkHttpConfig,\
+  com.yihu.admin.client.config.ScheduledConfig

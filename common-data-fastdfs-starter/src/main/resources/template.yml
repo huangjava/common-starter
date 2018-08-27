@@ -1,0 +1,13 @@
+fast-dfs:
+  tracker-server: 11.1.2.9:22122 #服务器地址
+  connect-timeout: 2 #链接超时时间
+  network-timeout: 30
+  charset: ISO8859-1 #编码
+  http:
+    tracker-http-port: 80
+    anti-steal-token: no
+    secret-key: FastDFS1234567890
+  pool: #连接池大小
+    init-size: 5
+    max-size: 20
+    wait-time: 500

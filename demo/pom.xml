@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.yihu</groupId>
+        <artifactId>jkzl-start</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yihu</groupId>
+    <artifactId>demo-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <developers>
+        <developer>
+            <id>cwd</id>
+            <name>陈伟达</name>
+            <email>494679975@qq.com</email>
+            <organizationUrl>localhost</organizationUrl>
+            <roles>
+                <role>Project programmer</role>
+            </roles>
+        </developer>
+    </developers>
+    <!--deploy 的时候发布到这个服务器-->
+    <distributionManagement>
+        <repository>
+            <id>jkzlRepositories</id>
+            <name>jkzlRepositories</name>
+            <url>http://172.19.103.43:8081/nexus/content/repositories/jkzlRepositories/</url>
+        </repository>
+    </distributionManagement>
+    <modules>
+
+        <module>/demo</module>
+        <module>/demo-admin-client</module>
+        <module>/demo-admin-server</module>
+        <module>/demo-lwb</module>
+        <module>/demo-router</module>
+    </modules>
+
+
+</project>

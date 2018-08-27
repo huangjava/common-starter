@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单管理页面</title>
+
+    <link href="../../common/css/bootstrap/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="../../common/css/bootstrap/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+
+    <link href="../../common/css/bootstrap/animate.min.css" rel="stylesheet">
+    <link href="../../common/css/bootstrap/style.min.css?v=3.0.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="../../common/css/bootstrap/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../../common/css/jw.css" rel="stylesheet">
+    <style>
+        .m-form-group:after {
+            display: table;
+            content: " ";
+            clear: both;
+        }
+
+        .m-form-group {
+            margin-top: 18px;;
+        }
+
+        select {
+            width: 250px !important;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight" style="height: 96%">
+    <div class="row" style="height: 100%">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Server</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="server_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">ip地址：</label>
+                            <label class="control-label">{{data.ip}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">端口号：</label>
+                            <label class="control-label ">{{data.port}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">最后更新时间：</label>
+                            <label class="control-label">{{data.lastUpdatedTimestampStr}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">服务器状态：</label>
+                            <label class="control-label">{{data.status}}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">查看日志：</label>
+                            <label class="control-label"><a  target="_blank" :href="data.address">服务器日志</a></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="ibox  float-e-margins">
+                <div class="ibox-title">
+                    <h5>JVM内存情况</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="metrics_mem_message_chart"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>JVM GC 情况</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="metrics_gc_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">gc回收次数：</label>
+                            <label class="control-label">{{data['gc.ps_scavenge.count']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">gc回收时间(毫秒)：</label>
+                            <label class="control-label">{{data['gc.ps_scavenge.time']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">标记-清除算法的次数：</label>
+                            <label class="control-label">{{data['gc.ps_marksweep.count']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">标记-清除算法的消耗时间：</label>
+                            <label class="control-label">{{data['gc.ps_marksweep.time']}}</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>堆信息</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="metrics_head_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">heap：</label>
+                            <label class="control-label">{{data.heap/1024}} MB</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">heap.used：</label>
+                            <label class="control-label ">{{data['heap.used']/1024}} MB</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">heap.init：</label>
+                            <label class="control-label">{{data['heap.init']/1024}} MB</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">heap.committed：</label>
+                            <label class="control-label">{{data['heap.committed']/1024}} MB</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>非堆信息</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="metrics_nothead_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">nonheap：</label>
+                            <label class="control-label">{{data.nonheap}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">nonheap.used：</label>
+                            <label class="control-label ">{{data['nonheap.used']/1024}} MB</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">nonheap.init：</label>
+                            <label class="control-label">{{data['nonheap.init']/1024}} MB</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">nonheap.committed：</label>
+                            <label class="control-label">{{data['nonheap.committed']/1024}} MB</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>JVM类加载信息</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="metrics_classes_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">类总数：</label>
+                            <label class="control-label">{{data.classes}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">已加载：</label>
+                            <label class="control-label ">{{data['classes.loaded']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">未加载：</label>
+                            <label class="control-label">{{data[['classes.unloaded']}}</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>JVM 线程信息</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="metrics_threads_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">线程总数：</label>
+                            <label class="control-label">{{data.threads}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">线程峰值数：</label>
+                            <label class="control-label ">{{data['threads.peak']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">守护线程数：</label>
+                            <label class="control-label">{{data['threads.daemon']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">运行中的线程总数：</label>
+                            <label class="control-label">{{data['threads.totalStarted']}}</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Env</h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="env_message">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">profiles：</label>
+                            <label class="control-label">{{data.profiles}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">os.name：</label>
+                            <label class="control-label">{{data.systemProperties['os.name']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">PID：</label>
+                            <label class="control-label">{{data.systemProperties.PID}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.runtime.name：</label>
+                            <label class="control-label ">{{data.systemProperties['java.runtime.name']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">sun.boot.library.path：</label>
+                            <label class="control-label ">{{data.systemProperties['sun.boot.library.path']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.specification.version：</label>
+                            <label class="control-label ">{{data.systemProperties['java.specification.version']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.vm.vendor：</label>
+                            <label class="control-label ">{{data.systemProperties['java.vm.vendor']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.vm.name：</label>
+                            <label class="control-label ">{{data.systemProperties['java.vm.name']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.runtime.name：</label>
+                            <label class="control-label ">{{data.systemProperties['java.runtime.name']}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label">java.home：</label>
+                            <label class="control-label ">{{data.systemProperties['java.home']}}</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script type="text/javascript" src="../../common/js/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../common/js/util/util.js"></script>
+
+<!--<script type="text/javascript" src="/common/js/vue/vue.js"></script>--><!--2.0-->
+<script type="text/javascript" src="../../common/js/vue.js"></script><!--1.0-->
+
+<script type="text/javascript" src="../../common/js/layer/layer.min.js"></script>
+
+<script type="text/javascript" src="../../common/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+<script type="text/javascript" src="../../common/js/plugins/moment/moment.js"></script>
+<script type="text/javascript" src="../../common/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script type="text/javascript" src="../../common/js/jquery-easyui-1.5.2/easyloader.js"></script>
+<script type="text/javascript" src="../../common/js/jquery-easyui-1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="../../common/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../common/js/common.js"></script>
+<script type="text/javascript" src="../../common/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="../../common/js/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="../../common/js/content.min.js?v=1.0.0"></script>
+<script type="text/javascript" src="../../common/js/plugins/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="../js/serverMessage.js"></script>
+
+</body>
+</html>

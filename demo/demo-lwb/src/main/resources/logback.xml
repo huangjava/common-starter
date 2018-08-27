@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="io.searchbox" level="WARN"/>
+
+
+    <!--提高整个日志的错误级别-->
+    <root level="INFO">
+    </root>
+    <!--扩展flume  end-->
+</configuration>

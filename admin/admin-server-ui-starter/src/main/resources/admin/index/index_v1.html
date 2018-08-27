@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title></title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../common/css/bootstrap/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../common/css/bootstrap/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../common/css/bootstrap/animate.min.css" rel="stylesheet">
+    <link href="../common/css/bootstrap/style.min.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg" >
+    <div id="index_v1_body">
+        <div  class="row  border-bottom white-bg dashboard-header">
+            <div class="col-sm-6">
+                <h2>
+                    微服务总数: {{data.microNum}}
+                </h2>
+                <br/>
+
+                <div class="text-left">
+                    <button class="btn btn-success" style="margin-left: 10px;" onclick="add()">新增springBoot微服务</button>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <h2>
+                    服务器总数: {{data.serverNum}}
+                </h2>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器(UP)数目</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1>
+                                {{data.upNum}}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器(DOWN)数目</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1>
+                                {{data.downNum}}
+                            </h1>
+
+                            <p v-for="value1 in data.downList">
+                                {{value1}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器(STARTING)数目</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1>
+                                {{data.startingNum}}
+                            </h1>
+                            <p v-for="value1 in data.startingList">
+                                {{value1}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器(OUT_OF_SERVICE)数目</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1>
+                                {{data.outNum}}
+                            </h1>
+                            <p v-for="value1 in data.outList">
+                                {{value1}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器(UNKNOWN)数目</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1>
+                                {{data.unknowNum}}
+                            </h1>
+                            <p v-for="value1 in data.unknowList">
+                                {{value1}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal-add-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-reloadCode="">
+        <div class="modal-dialog" style="width:1200px;height: 800px;">
+            <div class="modal-content">
+
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+    <script type="text/javascript" src="../common/js/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../common/js/content.min.js"></script>
+    <script type="text/javascript" src="../common/js/layer/layer.min.js"></script>
+    <script type="text/javascript" src="../common/js/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript" src="../common/js/vue/vue.min.js"></script>
+    <script type="text/javascript" src="../common/js/util/util.js"></script>
+    <script type="text/javascript" src="../common/js/common.js"></script>
+    <script src="index_v1.js"></script>
+</body>
+
+</html>

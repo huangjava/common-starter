@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.base.es.config.ElasticFactory,\
+  com.yihu.base.es.config.properties.ElasticSearchPorperties

@@ -1,0 +1,58 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: demo-eureka
+  data:
+    elasticsearch:
+      cluster-name: jkzl #es集群的名字
+      cluster-nodes: 172.19.103.68:9300  #多个逗号分割
+      cluster-nodes-jest: http://172.19.103.68:9200  #多个逗号分割
+      repositories:
+        enabled: true
+      properties:
+        client:
+          transport:
+            sniff: false  #开启嗅探集群  用nginx代理一层过后会出现ip解析失败问题
+      jest:
+        discovery-enabled: false #开启嗅探
+        conn-timeout: 60 # 连接时间单位是秒
+        read-timeout: 60 # 读取时间单位是秒
+        multith-readed: true #开启多线程
+        max-total-connection: 50 ##最大连接
+        max-connection-idle-time: 50 #最大等待时间
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://jw:jkzl@127.0.0.1:8761/eureka/
+
+
+  instance:
+    #eurika使用IP不使用host
+    prefer-ip-address: true
+    #定制化在eurika中显示的名称
+    ##instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    leaseRenewalIntervalInSeconds: 30 ##心跳时间 默认30秒 一般不修改
+
+
+management:
+  security:
+    enabled: false
+
+
+endpoints:
+  logfile:
+    enabled: true
+
+
+logging:
+  file: ${logging.path}demo-eureka.log
+  path: E:\idea_workspace\jkzl_git\jkzl-starter\jkzl-starter\demo\demo-admin-server\logs\
+  level:
+    root: INFO
+

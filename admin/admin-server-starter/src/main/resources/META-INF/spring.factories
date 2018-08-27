@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.yihu.admin.server.config.ZuulAutoConfig,\
+  com.yihu.admin.server.config.WebsocketConfig,\
+  com.yihu.admin.server.config.AdminServerAutoConfig
