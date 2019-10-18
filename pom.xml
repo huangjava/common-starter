@@ -81,7 +81,7 @@
         <version.scala>2.10.6</version.scala>
         <version.hbase-client>1.1.1</version.hbase-client>
         <version.joda-time>2.8.2</version.joda-time>
-        <version.solr>5.5.1</version.solr>
+        <version.solr>8.2.0</version.solr>
         <version.fastdfs>1.25</version.fastdfs>
 
 
