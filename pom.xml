@@ -68,7 +68,7 @@
         <version.logback>1.2.3</version.logback>
         <version.jest>2.4.0</version.jest>
         <version.json>20160212</version.json>
-        <verion.fastJson>1.2.17</verion.fastJson>
+        <verion.fastJson>1.2.25</verion.fastJson>
         <version.net-json>2.4</version.net-json>
         <version.common.lang3>3.2.1</version.common.lang3>
         <version.commons.collections>3.2.2</version.commons.collections>
