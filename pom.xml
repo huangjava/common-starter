@@ -64,7 +64,7 @@
         <version.servlet-api>3.1.0</version.servlet-api>
         <version.swagger>2.7.0</version.swagger>
         <version.swagger-ui>2.7.0</version.swagger-ui>
-        <version.quartz>2.3.0</version.quartz>
+        <version.quartz>2.3.2</version.quartz>
         <version.logback>1.2.3</version.logback>
         <version.jest>2.4.0</version.jest>
         <version.json>20160212</version.json>
