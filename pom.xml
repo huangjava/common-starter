@@ -73,7 +73,7 @@
         <version.common.lang3>3.2.1</version.common.lang3>
         <version.commons.collections>3.2.2</version.commons.collections>
         <version.commons.codec>1.11</version.commons.codec>
-        <version.elasticsearch>2.4.4</version.elasticsearch>
+        <version.elasticsearch>6.8.15</version.elasticsearch>
         <version.elasticsearch-sql>2.4.1.0</version.elasticsearch-sql>
 
         <version.hbase>1.1.12</version.hbase>
